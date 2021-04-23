@@ -3,29 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class FileExplorer : MonoBehaviour
 {
-   public string path;       // Stores file path of selected image
-   public RawImage image;    // For displaying selected image on game menu screen
+   public static string path;       // Stores file path of selected image
 
    public void OpenFileExp()
    {
        path = EditorUtility.OpenFilePanel("Overwrite with jpeg", "", "jpeg,png,jpg");
-       GetImage();
-   }
 
-   void GetImage()
-   {
-       if (path != null)
+       if(path != null)
        {
-           UpdateImage();
+           LoadNextLevel();
        }
    }
 
-   void UpdateImage()
+   public void LoadNextLevel()
    {
-       WWW www = new WWW("file:///" + path);
-       image.texture = www.texture;
+       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
    }
 }
