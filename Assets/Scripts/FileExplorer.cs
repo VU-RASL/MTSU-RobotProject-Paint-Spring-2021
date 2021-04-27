@@ -11,6 +11,17 @@ public class FileExplorer : MonoBehaviour
     public static string path;       // Stores file path of selected image
 
     public void OpenFileExp()
+    {   
+        path = EditorUtility.OpenFilePanel("Overwrite with jpeg", "", "jpeg,png,jpg");
+
+        if(path != null && path != "")
+        {
+           LoadNextLevel();
+        }
+    }
+
+
+    public void ConvertImage()
     {
         string path1 = Application.dataPath + @"/Scripts/countours.py";
         path1 = "\"" + path1 + "\"";
@@ -24,7 +35,6 @@ public class FileExplorer : MonoBehaviour
         }
 
         // Nibraas Code
-        string strCmdText = path;
         ProcessStartInfo startInfo = new ProcessStartInfo();
         startInfo.FileName = "CMD.exe";
         startInfo.Arguments = strCmdText;
